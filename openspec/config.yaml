@@ -1,0 +1,36 @@
+schema: spec-driven
+
+context: |
+  Product: a modern, polished Todo app (Todoist/Linear-class UX) with an AI
+  assistant. Full spec lives in docs/project_context.md — treat it as the
+  source requirements being translated into OpenSpec changes.
+
+  Tech stack:
+  - Backend: FastAPI, SQLAlchemy ORM, SQLite, Pydantic, Uvicorn, Python 3.12+.
+    Layered layout under backend/app/: database.py, models.py, schemas.py,
+    crud.py, config.py, main.py, and routers/. DB session via dependency
+    injection. CORS enabled for the frontend origin.
+  - Frontend: HTML5 + Tailwind (CDN) + Vanilla JS ES6 MODULES (no frameworks).
+    Split into modules under frontend/js/ (api.js, ui/, features/) instead of a
+    single script.js, so features can be built in parallel. Inter font,
+    Heroicons, gradient/glassmorphism design, dark mode, animations.
+  - AI: POST /agent/chat runs an agentic loop on Anthropic's Messages API with
+    tool calling. Model id claude-sonnet-4-6, kept in a single config constant.
+    Tools call crud.* functions directly (no self-HTTP).
+
+  Conventions (see CLAUDE.md): OpenSpec specs before implementation; every task
+  lists the files/dirs it touches; overlapping-file or undefined-contract tasks
+  run sequentially; shared types/schemas land on main before fan-out; each task
+  states a done-condition + test command. Type hints + docstrings on public
+  backend functions. REST: /todos GET/POST, /todos/{id} GET/PUT/DELETE.
+  Todo model: id, title(100), description(500), completed, created_at, updated_at.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
