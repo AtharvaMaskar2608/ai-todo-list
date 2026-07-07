@@ -75,7 +75,7 @@ new task card appears and a tool chip is shown).
 
 ## 5. Integration verification
 
-- [ ] 5.1 End-to-end check with backend agent + shell + todos running: open the
+- [x] 5.1 End-to-end check with backend agent + shell + todos running: open the
   app, open the chat, send "add a task called Buy milk", confirm a tool chip and
   a concise assistant reply appear and a "Buy milk" card shows in the list after
   `store.refresh()`. — files: frontend/js/features/chat/ (no code change; manual)
