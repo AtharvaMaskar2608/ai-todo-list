@@ -1,0 +1,171 @@
+/*
+ * style.css — custom animations and glassmorphism helpers beyond Tailwind.
+ * Tailwind (CDN) handles the utility classes; this file adds the few things
+ * Tailwind's runtime build doesn't give us: keyframes and reusable helpers
+ * that feature modules can attach via className.
+ */
+
+/* ---------- Base ---------- */
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  /* Smooth theme transition without flashing on first paint. */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Glassmorphism helper ---------- */
+/* Reusable frosted-glass surface for cards/panels that want more blur than
+   the inline Tailwind utilities provide. */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dark .glass {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- Keyframe animations ---------- */
+
+/* Card fade + slide in (used when rendering task cards). */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.28s ease-out both;
+}
+
+/* Card fade out (used when removing a task card). */
+@keyframes fade-out-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.animate-fade-out-down {
+  animation: fade-out-down 0.22s ease-in both;
+}
+
+/* Toast slide in from the right. */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+
+.toast-enter {
+  animation: toast-in 0.25s ease-out both;
+}
+
+.toast-exit {
+  animation: toast-out 0.25s ease-in both;
+}
+
+/* Modal open animation for the panel body. */
+@keyframes modal-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-modal-pop {
+  animation: modal-pop 0.2s ease-out both;
+}
+
+/* Skeleton shimmer (loading placeholders — no spinner). */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.15) 25%,
+    rgba(148, 163, 184, 0.3) 37%,
+    rgba(148, 163, 184, 0.15) 63%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.08) 25%,
+    rgba(148, 163, 184, 0.18) 37%,
+    rgba(148, 163, 184, 0.08) 63%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+/* ---------- Accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Thin, unobtrusive scrollbar for the AI message list. */
+#ai-messages {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.5) transparent;
+}
+
+#ai-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+#ai-messages::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.5);
+  border-radius: 9999px;
+}
