@@ -11,7 +11,7 @@ work and the list re-renders on any `store` change (including AI-driven
 
 ## 1. Feature entry & reactive wiring
 
-- [ ] 1.1 Create `initTodos()` that queries mount IDs, subscribes to `store`,
+- [x] 1.1 Create `initTodos()` that queries mount IDs, subscribes to `store`,
   and runs the initial `store.refresh()` — files: frontend/js/features/todos/index.js
   Contract: `export function initTodos(): void`. Done: on load, skeletons show
   then real cards render; every `store` change repaints `#todo-list`, stats,
@@ -19,7 +19,7 @@ work and the list re-renders on any `store` change (including AI-driven
 
 ## 2. Rendering
 
-- [ ] 2.1 Build card renderer (checkbox, title, description, created date,
+- [x] 2.1 Build card renderer (checkbox, title, description, created date,
   edit/delete buttons, completed styling, hover lift) and list painter that
   applies `store.filter` + `store.search` — files: frontend/js/features/todos/render.js
   Contract: `renderList(container, todos, view)`, `renderCard(todo): HTMLElement`.
@@ -27,7 +27,7 @@ work and the list re-renders on any `store` change (including AI-driven
 
 ## 3. Create form
 
-- [ ] 3.1 Wire the create form: trim + require title, disable submit while in
+- [x] 3.1 Wire the create form: trim + require title, disable submit while in
   flight, call `api.createTodo`, then clear inputs, `showToast`, `store.refresh()`,
   animate new card; submit on Enter — files: frontend/js/features/todos/form.js
   Contract: `initForm(): void` using `#todo-form`/`#todo-title`/`#todo-desc`.
@@ -35,7 +35,7 @@ work and the list re-renders on any `store` change (including AI-driven
 
 ## 4. Completion toggle
 
-- [ ] 4.1 Toggle completion from the card checkbox via
+- [x] 4.1 Toggle completion from the card checkbox via
   `api.updateTodo(id, { completed })` then `store.refresh()`; error toast on
   `ApiError` — files: frontend/js/features/todos/render.js
   Contract: checkbox change handler on each `renderCard`. Done: clicking the
@@ -44,7 +44,7 @@ work and the list re-renders on any `store` change (including AI-driven
 
 ## 5. Edit modal
 
-- [ ] 5.1 Open `#edit-modal` via `ui/modal` prefilled with the todo; Save calls
+- [x] 5.1 Open `#edit-modal` via `ui/modal` prefilled with the todo; Save calls
   `api.updateTodo(id, patch)` then closes, toasts, and `store.refresh()`; Cancel
   closes with no change — files: frontend/js/features/todos/edit.js
   Contract: `openEdit(todo): void`. Done: editing a title and saving updates the
@@ -52,7 +52,7 @@ work and the list re-renders on any `store` change (including AI-driven
 
 ## 6. Delete confirmation
 
-- [ ] 6.1 Open `#delete-modal` via `ui/modal`; Confirm animates the card out,
+- [x] 6.1 Open `#delete-modal` via `ui/modal`; Confirm animates the card out,
   then `api.deleteTodo(id)`, toast, `store.refresh()`; Cancel closes — files:
   frontend/js/features/todos/delete.js
   Contract: `openDelete(todo): void`. Done: confirming removes the card with an
@@ -60,7 +60,7 @@ work and the list re-renders on any `store` change (including AI-driven
 
 ## 7. Search & filters
 
-- [ ] 7.1 Wire live search (`#search-input` -> `store.setSearch`) and All/
+- [x] 7.1 Wire live search (`#search-input` -> `store.setSearch`) and All/
   Active/Completed pills (`store.setFilter`), reflecting active/inactive pill
   styling — files: frontend/js/features/todos/filters.js
   Contract: `initFilters(): void`. Done: typing filters the list live (title OR
@@ -69,7 +69,7 @@ work and the list re-renders on any `store` change (including AI-driven
 
 ## 8. Stats, progress & confetti
 
-- [ ] 8.1 Render stat counts (`#stat-all/-active/-completed`) with change
+- [x] 8.1 Render stat counts (`#stat-all/-active/-completed`) with change
   animation, animated progress bar (`#progress-bar`/`#progress-label`), and
   one-shot confetti when a non-empty list is fully complete (re-arm when a task
   becomes active) — files: frontend/js/features/todos/stats.js
@@ -78,7 +78,7 @@ work and the list re-renders on any `store` change (including AI-driven
 
 ## 9. Empty state
 
-- [ ] 9.1 Show/hide `#empty-state` with icon, message, and call-to-action when
+- [x] 9.1 Show/hide `#empty-state` with icon, message, and call-to-action when
   no todos are visible (zero todos or none matching filter+search) — files:
   frontend/js/features/todos/empty.js
   Contract: `renderEmpty(container, view): void`. Done: empty list and
@@ -86,7 +86,7 @@ work and the list re-renders on any `store` change (including AI-driven
 
 ## 10. End-to-end verification
 
-- [ ] 10.1 With backend + shell running, run through create / toggle / edit /
+- [x] 10.1 With backend + shell running, run through create / toggle / edit /
   delete / search / filter and confirm the list re-renders on `store` changes;
   verify via the `/browse` skill — files: frontend/js/features/todos/index.js
   Done: all flows pass in the browser with no console errors; AI-driven
